@@ -215,12 +215,6 @@ function autoKaart(auto) {
           <span class="prijs">${euro.format(auto.prijs)}</span>
           <span class="prijs-noot">Rijklaar</span>
         </div>
-        <div class="auto-knoppen">
-          <a class="btn btn-platform marktplaats" href="${esc(auto.links?.marktplaats || "#")}" target="_blank" rel="noopener">
-            <span class="platform-stip"></span>Bekijk op Marktplaats</a>
-          <a class="btn btn-platform autotrack" href="${esc(auto.links?.autotrack || "#")}" target="_blank" rel="noopener">
-            <span class="platform-stip"></span>Bekijk op AutoTrack</a>
-        </div>
         ${fotoCredits(fotos)}
       </div>
     </article>`;
@@ -254,9 +248,47 @@ function initGalerijen(container) {
   });
 }
 
+/* ---------- Mobiele swipe-carousels (diensten en uitgelichte occasions) ---------- */
+
+// Op mobiel maakt CSS van [data-swipe] een horizontale rij; hier komen de stipjes eronder.
+// Op desktop zijn de stipjes verborgen en is de rij gewoon een grid.
+function initSwipe(track) {
+  const kaarten = [...track.children].filter((k) => !k.matches(".lijst-fout, .lijst-leeg"));
+  let stippen = track.nextElementSibling;
+  if (!stippen?.classList.contains("swipe-stippen")) {
+    stippen = document.createElement("div");
+    stippen.className = "swipe-stippen";
+    track.after(stippen);
+    track.addEventListener("scroll", () => requestAnimationFrame(() => markeerSwipe(track)), { passive: true });
+    window.addEventListener("resize", () => markeerSwipe(track));
+  }
+  if (kaarten.length < 2) {
+    stippen.innerHTML = "";
+    return;
+  }
+  const naam = track.getAttribute("aria-label") || "kaart";
+  stippen.innerHTML = kaarten.map((_, i) =>
+    `<button type="button" aria-label="${esc(naam)}: ${i + 1} van ${kaarten.length}"></button>`).join("");
+  stippen.querySelectorAll("button").forEach((knop, i) => knop.addEventListener("click", () => {
+    track.scrollTo({ left: kaarten[i].offsetLeft - kaarten[0].offsetLeft, behavior: "smooth" });
+  }));
+  markeerSwipe(track);
+}
+
+function markeerSwipe(track) {
+  const knoppen = track.nextElementSibling?.querySelectorAll("button");
+  if (!knoppen?.length) return;
+  const eerste = track.children[0];
+  const stap = track.children[1] ? track.children[1].offsetLeft - eerste.offsetLeft : track.clientWidth;
+  const opEinde = track.scrollLeft > 0 && track.scrollLeft >= track.scrollWidth - track.clientWidth - 4;
+  const actief = opEinde ? knoppen.length - 1 : Math.round(track.scrollLeft / stap);
+  knoppen.forEach((k, i) => k.setAttribute("aria-current", String(i === actief)));
+}
+
 function toonAutos(container, autos) {
   container.innerHTML = autos.map(autoKaart).join("");
   initGalerijen(container);
+  if (container.hasAttribute("data-swipe")) initSwipe(container);
   initVerschijnen(container);
 }
 
@@ -494,12 +526,72 @@ function initVerschijnen(binnen = document) {
   elementen.forEach((el) => verschijnObserver.observe(el));
 }
 
+/* ---------- Actief menu-item (scroll-spy op de homepage) ---------- */
+
+// Onderstreept het menu-item van de sectie die in beeld is. Een link hoort bij een sectie via
+// zijn #anker, of via data-spy als hij naar een andere pagina gaat (zoals Occasions).
+function initScrollSpy() {
+  const links = [...document.querySelectorAll(".hoofdnav a")]
+    .map((link) => ({ link, sectie: document.getElementById(link.dataset.spy || link.hash.slice(1)) }))
+    .filter((item) => item.sectie && (item.link.dataset.spy || item.link.getAttribute("href").startsWith("#")));
+  if (!links.length) return;
+
+  const zetActief = (actieveLink) => {
+    links.forEach(({ link }) => {
+      const actief = link === actieveLink;
+      link.classList.toggle("actief", actief);
+      if (actief) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  };
+
+  const bepaal = () => {
+    const lijn = window.innerHeight * 0.35;
+    const opBodem = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
+    let huidige = links[0];
+    for (const item of links) {
+      if (item.sectie.getBoundingClientRect().top <= lijn) huidige = item;
+    }
+    if (opBodem) huidige = links.reduce((a, b) => (b.sectie.offsetTop > a.sectie.offsetTop ? b : a));
+    zetActief(huidige.link);
+  };
+
+  // Na een klik meteen het aangeklikte item tonen en niet meeflitsen met tussenliggende secties.
+  // Vrijgeven zodra het scrollen 150 ms stilstaat (of na 1 s als er niet gescrold hoeft te worden).
+  let vergrendeld = false;
+  let ontgrendelTimer;
+  const ontgrendel = () => { vergrendeld = false; bepaal(); };
+  links.forEach(({ link }) => link.addEventListener("click", () => {
+    if (!link.getAttribute("href").startsWith("#")) return;
+    zetActief(link);
+    vergrendeld = true;
+    clearTimeout(ontgrendelTimer);
+    ontgrendelTimer = setTimeout(ontgrendel, 1000);
+  }));
+
+  let gepland = false;
+  window.addEventListener("scroll", () => {
+    if (vergrendeld) {
+      clearTimeout(ontgrendelTimer);
+      ontgrendelTimer = setTimeout(ontgrendel, 150);
+      return;
+    }
+    if (gepland) return;
+    gepland = true;
+    requestAnimationFrame(() => { gepland = false; bepaal(); });
+  }, { passive: true });
+  window.addEventListener("resize", bepaal);
+  bepaal();
+}
+
 /* ---------- Start ---------- */
 
 plaatsIconen();
 initMenu();
 initOpeningstijden();
 initVerschijnen();
+initScrollSpy();
+document.querySelectorAll("[data-swipe]:not([data-uitgelicht])").forEach(initSwipe);
 initUitgelicht();
 initOccasions();
 initReviews();

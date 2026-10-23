@@ -11,7 +11,7 @@ Dubbelklik op **`start-demo.bat`**. De site opent dan op <http://localhost:8080>
 ## Structuur
 
 ```
-index.html            Home: hero, uitgelichte occasions, diensten, over ons, reviews, contact
+index.html            Home: hero, diensten, uitgelichte occasions, over ons, reviews, contact
 occasions.html        Volledig aanbod met filter op merk en prijs (+ sorteren)
 data/autos.json       Het occasion-aanbod (hier later het beheerportaal aan koppelen)
 data/reviews.json     Reviews en totaalscore (VOORBEELDEN)
@@ -59,7 +59,6 @@ Elke auto is één object in de lijst `autos`:
 | `uitgelicht`     | `true`                            | Maximaal 3 uitgelichte auto's verschijnen op de homepage |
 | `toegevoegd`     | `"2026-10-20"`                    | Voor sorteren op "Nieuwste aanbod"                |
 | `fotos`          | `[{ "src": "...", "alt": "..." }]` | Eerste foto = hoofdfoto; `credit` is optioneel   |
-| `links`          | `{ "marktplaats": "#", "autotrack": "#" }` | Links naar de advertenties              |
 
 `carrosserie` en `kleur` staan al in de data maar worden nog niet getoond.
 

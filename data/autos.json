@@ -27,8 +27,7 @@
           "alt": "Witte Volkswagen Golf, schuin achteraanzicht",
           "credit": { "naam": "Alexander-93", "licentie": "CC BY-SA 4.0", "url": "https://commons.wikimedia.org/wiki/File:Volkswagen_Golf_VIII_IMG_9744.jpg" }
         }
-      ],
-      "links": { "marktplaats": "#", "autotrack": "#" }
+      ]
     },
     {
       "id": "kia-niro-2023",
@@ -56,8 +55,7 @@
           "alt": "Grijze Kia Niro, schuin achteraanzicht",
           "credit": { "naam": "Alexander-93", "licentie": "CC BY-SA 4.0", "url": "https://commons.wikimedia.org/wiki/File:Kia_Niro_(SG2)_HEV_IMG_8250.jpg" }
         }
-      ],
-      "links": { "marktplaats": "#", "autotrack": "#" }
+      ]
     },
     {
       "id": "toyota-yaris-2020",
@@ -85,8 +83,7 @@
           "alt": "Rode Toyota Yaris met zwart dak, schuin achteraanzicht",
           "credit": { "naam": "Alexander Migl", "licentie": "CC BY-SA 4.0", "url": "https://commons.wikimedia.org/wiki/File:Toyota_Yaris_Hybrid_(XP210)_IMG_4863.jpg" }
         }
-      ],
-      "links": { "marktplaats": "#", "autotrack": "#" }
+      ]
     },
     {
       "id": "vw-polo-2022",
@@ -114,8 +111,7 @@
           "alt": "Witte Volkswagen Polo, schuin achteraanzicht",
           "credit": { "naam": "Alexander Migl", "licentie": "CC BY-SA 4.0", "url": "https://commons.wikimedia.org/wiki/File:Volkswagen_Polo_VI_(2021)_IMG_5322.jpg" }
         }
-      ],
-      "links": { "marktplaats": "#", "autotrack": "#" }
+      ]
     },
     {
       "id": "skoda-octavia-2020",
@@ -143,8 +139,7 @@
           "alt": "Zilveren Škoda Octavia Combi, schuin achteraanzicht",
           "credit": { "naam": "Alexander Migl", "licentie": "CC BY-SA 4.0", "url": "https://commons.wikimedia.org/wiki/File:Skoda_Octavia_IV_Combi_IMG_4249.jpg" }
         }
-      ],
-      "links": { "marktplaats": "#", "autotrack": "#" }
+      ]
     },
     {
       "id": "renault-clio-2020",
@@ -172,8 +167,7 @@
           "alt": "Witte Renault Clio, schuin achteraanzicht",
           "credit": { "naam": "Alexander Migl", "licentie": "CC BY-SA 4.0", "url": "https://commons.wikimedia.org/wiki/File:Renault_Clio_V_IMG_4181.jpg" }
         }
-      ],
-      "links": { "marktplaats": "#", "autotrack": "#" }
+      ]
     }
   ]
 }

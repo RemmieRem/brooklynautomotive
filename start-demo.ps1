@@ -13,7 +13,14 @@ $types = @{
 
 $listener = New-Object System.Net.HttpListener
 $listener.Prefixes.Add("http://localhost:$Poort/")
-$listener.Start()
+try {
+  $listener.Start()
+} catch {
+  # Poort al bezet: meestal draait de demo nog in een ander venster
+  Write-Host "Poort $Poort is al in gebruik; de demo draait waarschijnlijk al. Open http://localhost:$Poort"
+  if (-not $GeenBrowser) { Start-Process "http://localhost:$Poort/" }
+  exit
+}
 Write-Host "Demo draait op http://localhost:$Poort  (stoppen met Ctrl+C)"
 if (-not $GeenBrowser) { Start-Process "http://localhost:$Poort/" }
 

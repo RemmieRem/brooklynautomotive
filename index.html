@@ -64,9 +64,9 @@
       </a>
       <nav class="hoofdnav" aria-label="Hoofdmenu">
         <ul>
-          <li><a href="index.html" aria-current="page">Home</a></li>
-          <li><a href="occasions.html">Occasions</a></li>
+          <li><a href="#top" data-spy="top">Home</a></li>
           <li><a href="#diensten">Diensten</a></li>
+          <li><a href="occasions.html" data-spy="occasions">Occasions</a></li>
           <li><a href="#over-ons">Over ons</a></li>
           <li><a href="#reviews">Reviews</a></li>
           <li><a href="#contact">Contact</a></li>
@@ -91,9 +91,9 @@
     </div>
     <nav aria-label="Mobiel menu">
       <ul>
-        <li><a href="index.html">Home <svg class="icon" aria-hidden="true"><use href="#i-pijl"></use></svg></a></li>
-        <li><a href="occasions.html">Occasions <svg class="icon" aria-hidden="true"><use href="#i-pijl"></use></svg></a></li>
+        <li><a href="#top">Home <svg class="icon" aria-hidden="true"><use href="#i-pijl"></use></svg></a></li>
         <li><a href="#diensten">Diensten <svg class="icon" aria-hidden="true"><use href="#i-pijl"></use></svg></a></li>
+        <li><a href="occasions.html">Occasions <svg class="icon" aria-hidden="true"><use href="#i-pijl"></use></svg></a></li>
         <li><a href="#over-ons">Over ons <svg class="icon" aria-hidden="true"><use href="#i-pijl"></use></svg></a></li>
         <li><a href="#reviews">Reviews <svg class="icon" aria-hidden="true"><use href="#i-pijl"></use></svg></a></li>
         <li><a href="#contact">Contact <svg class="icon" aria-hidden="true"><use href="#i-pijl"></use></svg></a></li>
@@ -110,7 +110,7 @@
   <main id="inhoud">
 
     <!-- Hero -->
-    <section class="hero" aria-labelledby="hero-titel">
+    <section class="hero" id="top" aria-labelledby="hero-titel">
       <picture class="hero-foto">
         <source media="(max-width: 640px)" srcset="assets/img/sfeer/hero-mobiel.jpg">
         <img src="assets/img/sfeer/hero.jpg" alt="" fetchpriority="high" width="2000" height="1181">
@@ -152,33 +152,15 @@
       </div>
     </div>
 
-    <!-- Uitgelichte occasions -->
-    <section class="sectie" id="occasions" aria-labelledby="occasions-titel">
-      <div class="container">
-        <div class="sectie-kop">
-          <div>
-            <span class="sectie-label">Occasions</span>
-            <h2 id="occasions-titel">Uitgelicht aanbod</h2>
-            <p class="intro">Een greep uit onze voorraad. Elke auto wordt door ons nagekeken en afgeleverd met een duidelijke historie.</p>
-          </div>
-          <a class="link-pijl" href="occasions.html">Alle occasions bekijken <svg class="icon" aria-hidden="true"><use href="#i-pijl"></use></svg></a>
-        </div>
-        <div class="auto-grid" data-uitgelicht aria-live="polite"></div>
-        <div class="sectie-voet">
-          <a class="btn btn-donker" href="occasions.html"><span>Bekijk alle <span data-aantal-autos></span> occasions</span> <svg class="icon" aria-hidden="true"><use href="#i-pijl"></use></svg></a>
-        </div>
-      </div>
-    </section>
-
     <!-- Diensten -->
-    <section class="sectie sectie-zacht" id="diensten" aria-labelledby="diensten-titel">
+    <section class="sectie" id="diensten" aria-labelledby="diensten-titel">
       <div class="container">
         <div class="sectie-kop sectie-kop-midden">
           <span class="sectie-label">Werkplaats</span>
           <h2 id="diensten-titel">Onze diensten</h2>
           <p class="intro">Van een kleine beurt tot een lastige storing: in onze werkplaats in Breukelen staat uw auto in goede handen. Voor alle merken, ook lease- en bedrijfsauto's.</p>
         </div>
-        <div class="diensten-grid">
+        <div class="diensten-grid mobiel-carousel" data-swipe aria-label="Onze diensten">
           <article class="dienst verschijn">
             <div class="dienst-foto"><img src="assets/img/sfeer/apk.jpg" alt="Monteur controleert de motorruimte van een auto" loading="lazy" width="900" height="506"></div>
             <div class="dienst-body">
@@ -241,6 +223,24 @@
       </div>
     </section>
 
+    <!-- Uitgelichte occasions -->
+    <section class="sectie sectie-zacht" id="occasions" aria-labelledby="occasions-titel">
+      <div class="container">
+        <div class="sectie-kop">
+          <div>
+            <span class="sectie-label">Occasions</span>
+            <h2 id="occasions-titel">Uitgelicht aanbod</h2>
+            <p class="intro">Een greep uit onze voorraad. Elke auto wordt door ons nagekeken en afgeleverd met een duidelijke historie.</p>
+          </div>
+          <a class="link-pijl" href="occasions.html">Alle occasions bekijken <svg class="icon" aria-hidden="true"><use href="#i-pijl"></use></svg></a>
+        </div>
+        <div class="auto-grid mobiel-carousel" data-uitgelicht data-swipe aria-label="Uitgelichte occasions" aria-live="polite"></div>
+        <div class="sectie-voet">
+          <a class="btn btn-donker" href="occasions.html"><span>Bekijk alle <span data-aantal-autos></span> occasions</span> <svg class="icon" aria-hidden="true"><use href="#i-pijl"></use></svg></a>
+        </div>
+      </div>
+    </section>
+
     <!-- Over ons -->
     <section class="sectie" id="over-ons" aria-labelledby="over-titel">
       <div class="container over-grid">
@@ -281,7 +281,7 @@
     </section>
 
     <!-- Reviews -->
-    <section class="sectie sectie-donker" id="reviews" aria-labelledby="reviews-titel" data-reviews>
+    <section class="sectie sectie-zacht" id="reviews" aria-labelledby="reviews-titel" data-reviews>
       <div class="container">
         <div class="reviews-kop">
           <div>
@@ -331,7 +331,7 @@
     </section>
 
     <!-- Contact -->
-    <section class="sectie sectie-zacht" id="contact" aria-labelledby="contact-titel">
+    <section class="sectie" id="contact" aria-labelledby="contact-titel">
       <div class="container">
         <div class="sectie-kop">
           <div>
@@ -393,8 +393,8 @@
       <div>
         <h4>Menu</h4>
         <ul>
-          <li><a href="occasions.html">Occasions</a></li>
           <li><a href="#diensten">Diensten</a></li>
+          <li><a href="occasions.html">Occasions</a></li>
           <li><a href="#over-ons">Over ons</a></li>
           <li><a href="#reviews">Reviews</a></li>
           <li><a href="#contact">Contact</a></li>
