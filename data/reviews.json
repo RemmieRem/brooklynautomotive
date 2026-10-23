@@ -1,0 +1,45 @@
+{
+  "_toelichting": "VOORBEELDREVIEWS. Deze reviews en de score zijn verzonnen voor de demo. Vervang ze door echte Google-reviews (bijvoorbeeld via een koppeling met Google Business Profile).",
+  "voorbeeld": true,
+  "score": 4.9,
+  "aantal": "[AANTAL]",
+  "googleUrl": "#",
+  "reviews": [
+    {
+      "naam": "Sanne de V.",
+      "sterren": 5,
+      "wanneer": "2 weken geleden",
+      "tekst": "Mijn auto was binnen een dag klaar voor de APK. Vooraf duidelijk uitgelegd wat er moest gebeuren en er werd niets gedaan zonder overleg. Zo hoort het!"
+    },
+    {
+      "naam": "Mark J.",
+      "sterren": 5,
+      "wanneer": "1 maand geleden",
+      "tekst": "Hier mijn Golf gekocht. Eerlijk verhaal over de historie, netjes afgeleverd met nieuwe APK en een volle tank. Voelde vanaf het eerste contact vertrouwd."
+    },
+    {
+      "naam": "Fatima E.",
+      "sterren": 5,
+      "wanneer": "1 maand geleden",
+      "tekst": "Snel geholpen toen mijn airco het niet meer deed. Vriendelijke ontvangst, koffie klaar en de auto werd zelfs even schoongemaakt. Aanrader in Breukelen."
+    },
+    {
+      "naam": "Peter van D.",
+      "sterren": 4,
+      "wanneer": "2 maanden geleden",
+      "tekst": "Goede service bij het wisselen van mijn winterbanden. Ik moest even wachten omdat het druk was, maar het werk is keurig gedaan en ik kreeg goed advies over de profieldiepte."
+    },
+    {
+      "naam": "Lisa K.",
+      "sterren": 5,
+      "wanneer": "3 maanden geleden",
+      "tekst": "Al jaren laat ik hier mijn onderhoud doen. Je spreekt gewoon de monteur zelf en krijgt eerlijk advies, ook als iets nog prima een tijdje mee kan."
+    },
+    {
+      "naam": "Rob H.",
+      "sterren": 5,
+      "wanneer": "4 maanden geleden",
+      "tekst": "Storingslampje in mijn dashboard, binnen een uur uitgelezen en opgelost. Heldere uitleg en een nette afhandeling. Ik kom zeker terug."
+    }
+  ]
+}

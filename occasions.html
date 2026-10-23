@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Occasions | Brooklyn Automotive Breukelen</title>
+  <meta name="description" content="Bekijk het actuele occasion-aanbod van Brooklyn Automotive in Breukelen. Zorgvuldig nagekeken auto's met duidelijke historie.">
+  <meta name="theme-color" content="#17181b">
+  <link rel="icon" type="image/png" href="assets/img/logo-icoon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,600;0,700;1,600;1,700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <a class="skiplink" href="#inhoud">Direct naar de inhoud</a>
+
+  <div class="demo-balk" role="note">Demo-website: auto's, reviews en contactgegevens zijn voorbeelden.</div>
+
+  <!-- Topbalk (desktop) -->
+  <div class="topbalk">
+    <div class="container">
+      <div class="topbalk-groep">
+        <a class="topbalk-item" href="index.html#reviews"><span class="sterren" aria-hidden="true">★★★★★</span> 4,9 op Google (voorbeeld)</a>
+        <span class="topbalk-item" data-open-status></span>
+      </div>
+      <div class="topbalk-groep">
+        <span class="topbalk-item"><svg class="icon" aria-hidden="true"><use href="#i-pin"></use></svg>[ADRES], Breukelen</span>
+        <a class="topbalk-item" href="tel:[TELEFOON]"><svg class="icon" aria-hidden="true"><use href="#i-telefoon"></use></svg>[TELEFOON]</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <a class="logo" href="index.html" aria-label="Brooklyn Automotive – home">
+        <img src="assets/img/logo-licht.png" alt="Brooklyn Automotive" width="1310" height="346">
+      </a>
+      <nav class="hoofdnav" aria-label="Hoofdmenu">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="occasions.html" aria-current="page">Occasions</a></li>
+          <li><a href="index.html#diensten">Diensten</a></li>
+          <li><a href="index.html#over-ons">Over ons</a></li>
+          <li><a href="index.html#reviews">Reviews</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="header-acties">
+        <a class="btn btn-rood btn-klein" href="tel:[TELEFOON]"><svg class="icon" aria-hidden="true"><use href="#i-telefoon"></use></svg><span class="btn-tel-tekst">Bel ons</span></a>
+        <button class="menu-knop" type="button" aria-label="Menu openen" aria-controls="mobiel-menu" aria-expanded="false" data-menu-open>
+          <svg class="icon" aria-hidden="true"><use href="#i-menu"></use></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobiel menu -->
+  <div class="mobiel-menu" id="mobiel-menu" aria-hidden="true">
+    <div class="mobiel-menu-kop">
+      <a class="logo" href="index.html"><img src="assets/img/logo-licht.png" alt="Brooklyn Automotive" style="height:38px;width:auto"></a>
+      <button class="menu-knop" type="button" aria-label="Menu sluiten" data-menu-sluit style="display:block">
+        <svg class="icon" aria-hidden="true"><use href="#i-sluit"></use></svg>
+      </button>
+    </div>
+    <nav aria-label="Mobiel menu">
+      <ul>
+        <li><a href="index.html">Home <svg class="icon" aria-hidden="true"><use href="#i-pijl"></use></svg></a></li>
+        <li><a href="occasions.html">Occasions <svg class="icon" aria-hidden="true"><use href="#i-pijl"></use></svg></a></li>
+        <li><a href="index.html#diensten">Diensten <svg class="icon" aria-hidden="true"><use href="#i-pijl"></use></svg></a></li>
+        <li><a href="index.html#over-ons">Over ons <svg class="icon" aria-hidden="true"><use href="#i-pijl"></use></svg></a></li>
+        <li><a href="index.html#reviews">Reviews <svg class="icon" aria-hidden="true"><use href="#i-pijl"></use></svg></a></li>
+        <li><a href="index.html#contact">Contact <svg class="icon" aria-hidden="true"><use href="#i-pijl"></use></svg></a></li>
+      </ul>
+    </nav>
+    <a class="btn btn-rood btn-blok" href="tel:[TELEFOON]"><svg class="icon" aria-hidden="true"><use href="#i-telefoon"></use></svg>Bel [TELEFOON]</a>
+    <a class="btn btn-whatsapp btn-blok" href="https://wa.me/[WHATSAPP-NUMMER]" target="_blank" rel="noopener"><svg class="icon icon-vol" aria-hidden="true"><use href="#i-whatsapp"></use></svg>WhatsApp ons</a>
+    <div class="mobiel-menu-info">
+      <p data-open-status></p>
+      <p>[ADRES], [POSTCODE] Breukelen</p>
+    </div>
+  </div>
+
+  <main id="inhoud">
+    <section class="pagina-kop" aria-labelledby="pagina-titel">
+      <div class="container">
+        <nav class="kruimelpad" aria-label="Kruimelpad"><a href="index.html">Home</a> / Occasions</nav>
+        <h1 id="pagina-titel">Ons occasion-aanbod</h1>
+        <p class="intro">Zorgvuldig geselecteerde en nagekeken auto's. Interesse in een auto? Bekijk de volledige advertentie op Marktplaats of AutoTrack, of neem direct contact met ons op.</p>
+      </div>
+    </section>
+
+    <section class="sectie" style="padding-top:0" aria-label="Aanbod">
+      <div class="container">
+        <form class="filterbalk" aria-label="Filter het aanbod" onsubmit="return false">
+          <div class="veld">
+            <label for="filter-merk">Merk</label>
+            <select id="filter-merk">
+              <option value="">Alle merken</option>
+            </select>
+          </div>
+          <div class="veld">
+            <label for="filter-prijs">Maximale prijs</label>
+            <select id="filter-prijs">
+              <option value="">Alle prijzen</option>
+              <option value="15000">Tot € 15.000</option>
+              <option value="20000">Tot € 20.000</option>
+              <option value="25000">Tot € 25.000</option>
+              <option value="30000">Tot € 30.000</option>
+            </select>
+          </div>
+          <div class="veld veld-sorteer">
+            <label for="sorteer">Sorteren op</label>
+            <select id="sorteer">
+              <option value="nieuwste">Nieuwste aanbod</option>
+              <option value="prijs-laag">Prijs (laag – hoog)</option>
+              <option value="prijs-hoog">Prijs (hoog – laag)</option>
+              <option value="km-laag">Kilometerstand (laag – hoog)</option>
+              <option value="jaar-nieuw">Bouwjaar (nieuw – oud)</option>
+            </select>
+          </div>
+          <button class="filter-reset" type="button" id="filter-reset" hidden>Filters wissen</button>
+        </form>
+
+        <div class="resultaat-info" aria-live="polite">
+          <span><strong id="resultaat-aantal">–</strong> occasions gevonden</span>
+          <span>Alle prijzen zijn inclusief btw/marge</span>
+        </div>
+
+        <div class="auto-grid" id="occasions-lijst"></div>
+
+        <div class="diensten-cta" style="margin-top:56px">
+          <div>
+            <h3>Niet gevonden wat u zoekt?</h3>
+            <p>Vertel ons uw wensen; we gaan graag voor u op zoek naar de juiste auto.</p>
+          </div>
+          <div class="knoppen">
+            <a class="btn btn-rood" href="tel:[TELEFOON]"><svg class="icon" aria-hidden="true"><use href="#i-telefoon"></use></svg>Bel [TELEFOON]</a>
+            <a class="btn btn-whatsapp" href="https://wa.me/[WHATSAPP-NUMMER]" target="_blank" rel="noopener"><svg class="icon icon-vol" aria-hidden="true"><use href="#i-whatsapp"></use></svg>WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="logo" href="index.html"><img src="assets/img/logo-licht.png" alt="Brooklyn Automotive" width="1310" height="346"></a>
+        <p>Uw zelfstandige garage en occasionspecialist in Breukelen. Persoonlijk, vakkundig en eerlijk.</p>
+      </div>
+      <div>
+        <h4>Menu</h4>
+        <ul>
+          <li><a href="occasions.html">Occasions</a></li>
+          <li><a href="index.html#diensten">Diensten</a></li>
+          <li><a href="index.html#over-ons">Over ons</a></li>
+          <li><a href="index.html#reviews">Reviews</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul class="footer-contact">
+          <li><svg class="icon" aria-hidden="true"><use href="#i-pin"></use></svg><span>[ADRES]<br>[POSTCODE] Breukelen</span></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-telefoon"></use></svg><a href="tel:[TELEFOON]">[TELEFOON]</a></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-mail"></use></svg><a href="mailto:[E-MAIL]">[E-MAIL]</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Openingstijden</h4>
+        <ul class="footer-uren" data-openingstijden-kort></ul>
+      </div>
+    </div>
+    <div class="footer-onder">
+      <div class="container">
+        <span>© <span data-jaar>2026</span> Brooklyn Automotive · KvK [KVK-NUMMER]</span>
+        <ul>
+          <li><a href="#">Privacyverklaring</a></li>
+          <li><a href="#">Algemene voorwaarden</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Vaste actiebalk op mobiel -->
+  <div class="actiebalk">
+    <a class="btn btn-rood" href="tel:[TELEFOON]"><svg class="icon" aria-hidden="true"><use href="#i-telefoon"></use></svg>Bellen</a>
+    <a class="btn btn-whatsapp" href="https://wa.me/[WHATSAPP-NUMMER]" target="_blank" rel="noopener"><svg class="icon icon-vol" aria-hidden="true"><use href="#i-whatsapp"></use></svg>WhatsApp</a>
+  </div>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

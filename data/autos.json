@@ -1,0 +1,179 @@
+{
+  "_toelichting": "Demo-aanbod. Elke auto is één object in 'autos'. Prijs en kilometerstand als getal (zonder punten). Status: 'beschikbaar', 'gereserveerd' of 'verkocht'. Foto's met een 'credit' komen van Wikimedia Commons (CC BY-SA 4.0); bij eigen foto's mag 'credit' weg.",
+  "autos": [
+    {
+      "id": "vw-golf-2021",
+      "merk": "Volkswagen",
+      "model": "Golf",
+      "uitvoering": "1.0 eTSI Life",
+      "bouwjaar": 2021,
+      "kilometerstand": 68450,
+      "prijs": 21950,
+      "brandstof": "Benzine",
+      "transmissie": "Automaat",
+      "carrosserie": "Hatchback",
+      "kleur": "Wit",
+      "status": "beschikbaar",
+      "uitgelicht": true,
+      "toegevoegd": "2026-10-20",
+      "fotos": [
+        {
+          "src": "assets/img/autos/golf-1.jpg",
+          "alt": "Witte Volkswagen Golf, schuin vooraanzicht",
+          "credit": { "naam": "Alexander-93", "licentie": "CC BY-SA 4.0", "url": "https://commons.wikimedia.org/wiki/File:Volkswagen_Golf_VIII_IMG_9737.jpg" }
+        },
+        {
+          "src": "assets/img/autos/golf-2.jpg",
+          "alt": "Witte Volkswagen Golf, schuin achteraanzicht",
+          "credit": { "naam": "Alexander-93", "licentie": "CC BY-SA 4.0", "url": "https://commons.wikimedia.org/wiki/File:Volkswagen_Golf_VIII_IMG_9744.jpg" }
+        }
+      ],
+      "links": { "marktplaats": "#", "autotrack": "#" }
+    },
+    {
+      "id": "kia-niro-2023",
+      "merk": "Kia",
+      "model": "Niro",
+      "uitvoering": "1.6 GDi Hybrid DynamicLine",
+      "bouwjaar": 2023,
+      "kilometerstand": 38600,
+      "prijs": 27950,
+      "brandstof": "Hybride",
+      "transmissie": "Automaat",
+      "carrosserie": "SUV",
+      "kleur": "Grijs",
+      "status": "beschikbaar",
+      "uitgelicht": true,
+      "toegevoegd": "2026-10-17",
+      "fotos": [
+        {
+          "src": "assets/img/autos/niro-1.jpg",
+          "alt": "Grijze Kia Niro, schuin vooraanzicht",
+          "credit": { "naam": "Alexander-93", "licentie": "CC BY-SA 4.0", "url": "https://commons.wikimedia.org/wiki/File:Kia_Niro_(SG2)_HEV_IMG_8251.jpg" }
+        },
+        {
+          "src": "assets/img/autos/niro-2.jpg",
+          "alt": "Grijze Kia Niro, schuin achteraanzicht",
+          "credit": { "naam": "Alexander-93", "licentie": "CC BY-SA 4.0", "url": "https://commons.wikimedia.org/wiki/File:Kia_Niro_(SG2)_HEV_IMG_8250.jpg" }
+        }
+      ],
+      "links": { "marktplaats": "#", "autotrack": "#" }
+    },
+    {
+      "id": "toyota-yaris-2020",
+      "merk": "Toyota",
+      "model": "Yaris",
+      "uitvoering": "1.5 Hybrid Dynamic",
+      "bouwjaar": 2020,
+      "kilometerstand": 74900,
+      "prijs": 17450,
+      "brandstof": "Hybride",
+      "transmissie": "Automaat",
+      "carrosserie": "Hatchback",
+      "kleur": "Rood",
+      "status": "beschikbaar",
+      "uitgelicht": true,
+      "toegevoegd": "2026-10-12",
+      "fotos": [
+        {
+          "src": "assets/img/autos/yaris-1.jpg",
+          "alt": "Rode Toyota Yaris met zwart dak, schuin vooraanzicht",
+          "credit": { "naam": "Alexander Migl", "licentie": "CC BY-SA 4.0", "url": "https://commons.wikimedia.org/wiki/File:Toyota_Yaris_Hybrid_(XP210)_IMG_4866.jpg" }
+        },
+        {
+          "src": "assets/img/autos/yaris-2.jpg",
+          "alt": "Rode Toyota Yaris met zwart dak, schuin achteraanzicht",
+          "credit": { "naam": "Alexander Migl", "licentie": "CC BY-SA 4.0", "url": "https://commons.wikimedia.org/wiki/File:Toyota_Yaris_Hybrid_(XP210)_IMG_4863.jpg" }
+        }
+      ],
+      "links": { "marktplaats": "#", "autotrack": "#" }
+    },
+    {
+      "id": "vw-polo-2022",
+      "merk": "Volkswagen",
+      "model": "Polo",
+      "uitvoering": "1.0 TSI Style",
+      "bouwjaar": 2022,
+      "kilometerstand": 41200,
+      "prijs": 18750,
+      "brandstof": "Benzine",
+      "transmissie": "Handgeschakeld",
+      "carrosserie": "Hatchback",
+      "kleur": "Wit",
+      "status": "beschikbaar",
+      "uitgelicht": false,
+      "toegevoegd": "2026-10-08",
+      "fotos": [
+        {
+          "src": "assets/img/autos/polo-1.jpg",
+          "alt": "Witte Volkswagen Polo, schuin vooraanzicht",
+          "credit": { "naam": "Alexander Migl", "licentie": "CC BY-SA 4.0", "url": "https://commons.wikimedia.org/wiki/File:Volkswagen_Polo_VI_(2021)_IMG_5320.jpg" }
+        },
+        {
+          "src": "assets/img/autos/polo-2.jpg",
+          "alt": "Witte Volkswagen Polo, schuin achteraanzicht",
+          "credit": { "naam": "Alexander Migl", "licentie": "CC BY-SA 4.0", "url": "https://commons.wikimedia.org/wiki/File:Volkswagen_Polo_VI_(2021)_IMG_5322.jpg" }
+        }
+      ],
+      "links": { "marktplaats": "#", "autotrack": "#" }
+    },
+    {
+      "id": "skoda-octavia-2020",
+      "merk": "Škoda",
+      "model": "Octavia Combi",
+      "uitvoering": "1.0 TSI Business Edition",
+      "bouwjaar": 2020,
+      "kilometerstand": 112300,
+      "prijs": 16950,
+      "brandstof": "Benzine",
+      "transmissie": "Handgeschakeld",
+      "carrosserie": "Stationwagon",
+      "kleur": "Zilver",
+      "status": "beschikbaar",
+      "uitgelicht": false,
+      "toegevoegd": "2026-10-03",
+      "fotos": [
+        {
+          "src": "assets/img/autos/octavia-1.jpg",
+          "alt": "Zilveren Škoda Octavia Combi, schuin vooraanzicht",
+          "credit": { "naam": "Alexander Migl", "licentie": "CC BY-SA 4.0", "url": "https://commons.wikimedia.org/wiki/File:Skoda_Octavia_IV_Combi_IMG_4248.jpg" }
+        },
+        {
+          "src": "assets/img/autos/octavia-2.jpg",
+          "alt": "Zilveren Škoda Octavia Combi, schuin achteraanzicht",
+          "credit": { "naam": "Alexander Migl", "licentie": "CC BY-SA 4.0", "url": "https://commons.wikimedia.org/wiki/File:Skoda_Octavia_IV_Combi_IMG_4249.jpg" }
+        }
+      ],
+      "links": { "marktplaats": "#", "autotrack": "#" }
+    },
+    {
+      "id": "renault-clio-2020",
+      "merk": "Renault",
+      "model": "Clio",
+      "uitvoering": "1.0 TCe Zen",
+      "bouwjaar": 2020,
+      "kilometerstand": 59800,
+      "prijs": 13950,
+      "brandstof": "Benzine",
+      "transmissie": "Handgeschakeld",
+      "carrosserie": "Hatchback",
+      "kleur": "Wit",
+      "status": "beschikbaar",
+      "uitgelicht": false,
+      "toegevoegd": "2026-09-27",
+      "fotos": [
+        {
+          "src": "assets/img/autos/clio-1.jpg",
+          "alt": "Witte Renault Clio, schuin vooraanzicht",
+          "credit": { "naam": "Alexander Migl", "licentie": "CC BY-SA 4.0", "url": "https://commons.wikimedia.org/wiki/File:Renault_Clio_V_IMG_4178.jpg" }
+        },
+        {
+          "src": "assets/img/autos/clio-2.jpg",
+          "alt": "Witte Renault Clio, schuin achteraanzicht",
+          "credit": { "naam": "Alexander Migl", "licentie": "CC BY-SA 4.0", "url": "https://commons.wikimedia.org/wiki/File:Renault_Clio_V_IMG_4181.jpg" }
+        }
+      ],
+      "links": { "marktplaats": "#", "autotrack": "#" }
+    }
+  ]
+}
