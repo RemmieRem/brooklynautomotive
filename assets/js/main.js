@@ -21,6 +21,13 @@ const OPENINGSTIJDEN = [
 const DATA_AUTOS = "data/autos.json";
 const DATA_REVIEWS = "data/reviews.json";
 
+// Contactgegevens voor links die het script zelf maakt (bellen/WhatsApp vanaf de detailpagina).
+// WhatsApp-nummer internationaal zonder + of 0, bijv. 31612345678.
+const TELEFOON = "[TELEFOON]";
+const WHATSAPP_NUMMER = "[WHATSAPP-NUMMER]";
+
+const detailUrl = (auto) => `auto.html?id=${encodeURIComponent(auto.id)}`;
+
 /* ---------- Iconen (SVG-sprite, één keer in de pagina gezet) ---------- */
 
 const ICONEN = {
@@ -184,15 +191,17 @@ function autoKaart(auto) {
   const titel = `${auto.merk} ${auto.model}`;
   const fotos = auto.fotos?.length ? auto.fotos : [{ src: "assets/img/logo-icoon.png", alt: titel }];
   const meerdere = fotos.length > 1;
-  const badge =
-    auto.status === "verkocht" ? '<span class="auto-badge verkocht">Verkocht</span>'
+  const verkocht = auto.status === "verkocht";
+  const url = detailUrl(auto);
+  const label =
+    verkocht ? lintVerkocht()
     : auto.status === "gereserveerd" ? '<span class="auto-badge gereserveerd">Gereserveerd</span>'
     : "";
 
   return `
-    <article class="auto-kaart verschijn" aria-label="${esc(titel)}">
+    <article class="auto-kaart klikbaar verschijn${verkocht ? " is-verkocht" : ""}" aria-label="${esc(titel)}" data-href="${esc(url)}">
       <div class="galerij" data-galerij>
-        ${badge}
+        ${label}
         <div class="galerij-track" tabindex="0" aria-label="Foto's van de ${esc(titel)}">
           ${fotos.map((f, i) => `<img src="${esc(f.src)}" alt="${esc(f.alt || titel)}" loading="${i === 0 ? "eager" : "lazy"}" decoding="async" width="1200" height="800">`).join("")}
         </div>
@@ -203,7 +212,7 @@ function autoKaart(auto) {
       </div>
       <div class="auto-body">
         <div class="auto-merk">${esc(auto.merk)}</div>
-        <h3 class="auto-titel">${esc(auto.model)}</h3>
+        <h3 class="auto-titel"><a href="${esc(url)}">${esc(auto.model)}</a></h3>
         <p class="auto-uitvoering">${esc(auto.uitvoering)}</p>
         <ul class="specs">
           <li>${icoon("kalender")}<span class="spec-label">Bouwjaar:</span>${esc(auto.bouwjaar)}</li>
@@ -213,11 +222,26 @@ function autoKaart(auto) {
         </ul>
         <div class="auto-prijs">
           <span class="prijs">${euro.format(auto.prijs)}</span>
-          <span class="prijs-noot">Rijklaar</span>
+          <span class="prijs-noot">${verkocht ? "Verkocht" : "Rijklaar"}</span>
         </div>
+        <span class="auto-meer" aria-hidden="true">Bekijk details ${icoon("pijl")}</span>
         ${fotoCredits(fotos)}
       </div>
     </article>`;
+}
+
+function lintVerkocht(extraKlasse = "") {
+  return `<div class="lint-verkocht ${extraKlasse}"><span>Verkocht</span></div>`;
+}
+
+// Klik ergens op de kaart = naar de detailpagina (behalve op de fotopijltjes en links)
+function maakKaartenKlikbaar(container) {
+  container.querySelectorAll(".auto-kaart.klikbaar").forEach((kaart) => {
+    kaart.addEventListener("click", (e) => {
+      if (e.target.closest("a, button") || window.getSelection().toString()) return;
+      location.href = kaart.dataset.href;
+    });
+  });
 }
 
 function initGalerijen(container) {
@@ -233,10 +257,12 @@ function initGalerijen(container) {
     const ga = (i) => track.scrollTo({ left: i * track.clientWidth, behavior: "smooth" });
     const update = () => {
       const i = index();
-      teller.textContent = i + 1;
+      if (teller) teller.textContent = i + 1;
       vorige.disabled = i <= 0;
       volgende.disabled = i >= aantal - 1;
+      galerij.dispatchEvent(new CustomEvent("fotowissel", { detail: i }));
     };
+    galerij.gaNaarFoto = ga;
 
     vorige.addEventListener("click", () => ga(index() - 1));
     volgende.addEventListener("click", () => ga(index() + 1));
@@ -288,6 +314,7 @@ function markeerSwipe(track) {
 function toonAutos(container, autos) {
   container.innerHTML = autos.map(autoKaart).join("");
   initGalerijen(container);
+  maakKaartenKlikbaar(container);
   if (container.hasAttribute("data-swipe")) initSwipe(container);
   initVerschijnen(container);
 }
@@ -368,7 +395,8 @@ async function initOccasions() {
     const max = Number(prijsSelect.value) || Infinity;
     const resultaat = autos
       .filter((a) => (!merk || a.merk === merk) && a.prijs <= max)
-      .sort(sorteerders[sorteerSelect.value] || nieuwsteEerst);
+      .sort((a, b) => (a.status === "verkocht") - (b.status === "verkocht")
+        || (sorteerders[sorteerSelect.value] || nieuwsteEerst)(a, b)); // verkochte auto's achteraan
 
     aantalEl.textContent = resultaat.length;
     resetKnop.hidden = !merk && !prijsSelect.value;
@@ -399,6 +427,158 @@ async function initOccasions() {
   [merkSelect, prijsSelect, sorteerSelect].forEach((s) => s.addEventListener("change", pasToe));
   resetKnop.addEventListener("click", wis);
   pasToe();
+}
+
+/* ---------- Detailpagina (auto.html?id=...) ---------- */
+
+// Rijen in de tabel "Specificaties". Lege waarden worden overgeslagen.
+// Later uitbreiden met RDW-velden is één regel per veld, bijv. ["APK geldig tot", (a) => a.rdw?.apk].
+const SPECIFICATIES = [
+  ["Merk", (a) => a.merk],
+  ["Model", (a) => a.model],
+  ["Uitvoering", (a) => a.uitvoering],
+  ["Bouwjaar", (a) => a.bouwjaar],
+  ["Kilometerstand", (a) => a.kilometerstand != null && `${getal.format(a.kilometerstand)} km`],
+  ["Brandstof", (a) => a.brandstof],
+  ["Transmissie", (a) => a.transmissie],
+  ["Carrosserie", (a) => a.carrosserie],
+  ["Kleur", (a) => a.kleur],
+  ["Vermogen", (a) => a.vermogen_pk && `${a.vermogen_pk} pk`],
+  ["Aantal deuren", (a) => a.deuren],
+];
+
+function whatsappLink(auto) {
+  const naam = `${auto.merk} ${auto.model} ${auto.uitvoering}`.trim();
+  const vraag = auto.status === "verkocht"
+    ? "Ik zie dat deze verkocht is. Hebben jullie iets vergelijkbaars?"
+    : "Is deze auto nog beschikbaar?";
+  const tekst = `Hallo Brooklyn Automotive, ik heb een vraag over de ${naam} (${auto.bouwjaar}, ${euro.format(auto.prijs)}). ${vraag}\n${location.href}`;
+  return `https://wa.me/${WHATSAPP_NUMMER}?text=${encodeURIComponent(tekst)}`;
+}
+
+function detailHtml(auto) {
+  const titel = `${auto.merk} ${auto.model}`;
+  const fotos = auto.fotos?.length ? auto.fotos : [{ src: "assets/img/logo-icoon.png", alt: titel }];
+  const verkocht = auto.status === "verkocht";
+  const meerdere = fotos.length > 1;
+  const specRijen = SPECIFICATIES
+    .map(([label, waarde]) => [label, waarde(auto)])
+    .filter(([, w]) => w !== undefined && w !== null && w !== false && w !== "")
+    .map(([label, w]) => `<tr><th scope="row">${esc(label)}</th><td>${esc(w)}</td></tr>`).join("");
+
+  return `
+    <div class="detail-grid">
+      <div>
+        <div class="galerij detail-galerij" data-galerij>
+          ${verkocht ? lintVerkocht("groot") : auto.status === "gereserveerd" ? '<span class="auto-badge gereserveerd">Gereserveerd</span>' : ""}
+          <div class="galerij-track" tabindex="0" aria-label="Foto's van de ${esc(titel)}">
+            ${fotos.map((f, i) => `<img src="${esc(f.src)}" alt="${esc(f.alt || titel)}" loading="${i === 0 ? "eager" : "lazy"}" decoding="async" width="1200" height="800">`).join("")}
+          </div>
+          ${meerdere ? `
+            <button class="galerij-knop vorige" type="button" aria-label="Vorige foto" disabled>${icoon("links")}</button>
+            <button class="galerij-knop volgende" type="button" aria-label="Volgende foto">${icoon("rechts")}</button>
+            <span class="galerij-teller">${icoon("foto")}<span><span data-teller>1</span>/${fotos.length}</span></span>` : ""}
+        </div>
+        ${meerdere ? `<div class="duimnagels" aria-label="Kies een foto">
+          ${fotos.map((f, i) => `<button type="button" aria-label="Foto ${i + 1}" aria-current="${i === 0}"><img src="${esc(f.src)}" alt="" loading="lazy"></button>`).join("")}
+        </div>` : ""}
+        ${fotoCredits(fotos)}
+      </div>
+
+      <aside class="detail-paneel" aria-label="Samenvatting">
+        <div class="auto-merk">${esc(auto.merk)}</div>
+        <h1>${esc(auto.model)}</h1>
+        <p class="auto-uitvoering">${esc(auto.uitvoering)}</p>
+        ${verkocht ? '<p class="detail-status-verkocht"><strong>Deze auto is verkocht.</strong> Op zoek naar iets vergelijkbaars? We denken graag met u mee.</p>' : ""}
+        <ul class="specs">
+          <li>${icoon("kalender")}<span class="spec-label">Bouwjaar:</span>${esc(auto.bouwjaar)}</li>
+          <li>${icoon("teller")}<span class="spec-label">Kilometerstand:</span>${getal.format(auto.kilometerstand)} km</li>
+          <li>${icoon("brandstof")}<span class="spec-label">Brandstof:</span>${esc(auto.brandstof)}</li>
+          <li>${icoon("versnelling")}<span class="spec-label">Transmissie:</span>${esc(auto.transmissie)}</li>
+        </ul>
+        <div class="detail-prijs${verkocht ? " verkocht" : ""}">
+          <span class="prijs">${euro.format(auto.prijs)}</span>
+          <span class="prijs-noot">${verkocht ? "Verkocht" : "Rijklaar"}</span>
+        </div>
+        <div class="detail-contact">
+          <p>${verkocht ? "Interesse in een vergelijkbare auto?" : "Vragen of een proefrit plannen?"}</p>
+          <a class="btn btn-rood" href="tel:${esc(TELEFOON)}">${icoon("telefoon")}Bel ${esc(TELEFOON)}</a>
+          <a class="btn btn-whatsapp" href="${esc(whatsappLink(auto))}" target="_blank" rel="noopener">${icoon("whatsapp")}WhatsApp over deze auto</a>
+        </div>
+        <a class="detail-terug" href="occasions.html">${icoon("links")}Terug naar het aanbod</a>
+      </aside>
+    </div>
+
+    <div class="detail-blokken">
+      <div>
+        ${auto.beschrijving ? `<section class="detail-blok"><h2>Beschrijving</h2><p>${esc(auto.beschrijving)}</p></section>` : ""}
+        ${auto.opties?.length ? `<section class="detail-blok"><h2>Uitrusting</h2>
+          <ul class="opties">${auto.opties.map((o) => `<li>${icoon("vink")}${esc(o)}</li>`).join("")}</ul></section>` : ""}
+      </div>
+      <div>
+        <section class="detail-blok"><h2>Specificaties</h2><table class="spec-tabel"><tbody>${specRijen}</tbody></table></section>
+        <!-- Plek voor RDW-gegevens (APK, eerste toelating, ...); gevuld door toonRdwGegevens() zodra die gekoppeld is -->
+        <section class="detail-blok" id="rdw-gegevens" hidden></section>
+      </div>
+    </div>`;
+}
+
+// Uitbreidingspunt voor de RDW-koppeling. Vul in autos.json het veld 'kenteken' en haal hier de
+// gegevens op uit de open data van de RDW, bijv.:
+//   https://opendata.rdw.nl/resource/m9d7-ebf2.json?kenteken=AB123C   (hoofdletters, zonder streepjes)
+// en toon ze in #rdw-gegevens. Zolang er geen kenteken is, blijft het blok verborgen.
+function toonRdwGegevens(auto) {
+  if (!auto.kenteken) return;
+}
+
+async function initDetail() {
+  const container = document.getElementById("auto-detail");
+  if (!container) return;
+  const id = new URLSearchParams(location.search).get("id");
+
+  let autos;
+  try {
+    ({ autos } = await laadJson(DATA_AUTOS));
+  } catch (fout) {
+    container.innerHTML = `<p class="lijst-fout">${foutmelding(fout)}</p>`;
+    return;
+  }
+
+  const auto = autos.find((a) => a.id === id);
+  if (!auto) {
+    container.innerHTML = `<div class="lijst-leeg"><p><strong>Deze occasion kon niet worden gevonden.</strong></p>
+      <p>Mogelijk staat hij niet meer in ons aanbod.</p>
+      <a class="btn btn-omlijnd btn-klein" href="occasions.html">Bekijk het actuele aanbod</a></div>`;
+    return;
+  }
+
+  const naam = `${auto.merk} ${auto.model}`;
+  document.title = `${naam} ${auto.uitvoering} | Brooklyn Automotive Breukelen`;
+  document.querySelectorAll("[data-kruimel-auto]").forEach((el) => (el.textContent = naam));
+  container.innerHTML = detailHtml(auto);
+  initGalerijen(container);
+
+  // Duimnagels gekoppeld aan de grote foto
+  const galerij = container.querySelector("[data-galerij]");
+  const duimen = [...container.querySelectorAll(".duimnagels button")];
+  duimen.forEach((knop, i) => knop.addEventListener("click", () => galerij.gaNaarFoto?.(i)));
+  galerij.addEventListener("fotowissel", (e) => {
+    duimen.forEach((knop, i) => knop.setAttribute("aria-current", String(i === e.detail)));
+  });
+
+  // De vaste mobiele balk stuurt een WhatsApp-bericht over deze auto
+  document.querySelectorAll("[data-whatsapp-auto]").forEach((a) => (a.href = whatsappLink(auto)));
+
+  toonRdwGegevens(auto);
+
+  // Andere beschikbare occasions
+  const meer = document.querySelector("[data-meer]");
+  const lijst = document.querySelector("[data-meer-lijst]");
+  const anderen = autos.filter((a) => a.id !== auto.id && a.status !== "verkocht").sort(nieuwsteEerst).slice(0, 3);
+  if (meer && lijst && anderen.length) {
+    meer.hidden = false;
+    toonAutos(lijst, anderen);
+  }
 }
 
 /* ---------- Reviews ---------- */
@@ -594,5 +774,6 @@ initScrollSpy();
 document.querySelectorAll("[data-swipe]:not([data-uitgelicht])").forEach(initSwipe);
 initUitgelicht();
 initOccasions();
+initDetail();
 initReviews();
 document.querySelectorAll("[data-jaar]").forEach((el) => (el.textContent = new Date().getFullYear()));

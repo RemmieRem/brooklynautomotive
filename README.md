@@ -13,6 +13,7 @@ Dubbelklik op **`start-demo.bat`**. De site opent dan op <http://localhost:8080>
 ```
 index.html            Home: hero, diensten, uitgelichte occasions, over ons, reviews, contact
 occasions.html        Volledig aanbod met filter op merk en prijs (+ sorteren)
+auto.html             Detailpagina per auto (auto.html?id=vw-golf-2021), gevuld vanuit autos.json
 data/autos.json       Het occasion-aanbod (hier later het beheerportaal aan koppelen)
 data/reviews.json     Reviews en totaalscore (VOORBEELDEN)
 assets/css/style.css  Alle opmaak (kleuren staan bovenaan als variabelen)
@@ -22,7 +23,7 @@ assets/img/           Logo, sfeerfoto's en autofoto's
 
 ## Nog in te vullen (placeholders)
 
-Zoek en vervang in `index.html` en `occasions.html`:
+Zoek en vervang in **alle bestanden** (`index.html`, `occasions.html`, `auto.html` en `assets/js/main.js`; in VS Code met Ctrl+Shift+H):
 
 | Placeholder          | Wat                                                                  |
 |----------------------|----------------------------------------------------------------------|
@@ -59,8 +60,21 @@ Elke auto is één object in de lijst `autos`:
 | `uitgelicht`     | `true`                            | Maximaal 3 uitgelichte auto's verschijnen op de homepage |
 | `toegevoegd`     | `"2026-10-20"`                    | Voor sorteren op "Nieuwste aanbod"                |
 | `fotos`          | `[{ "src": "...", "alt": "..." }]` | Eerste foto = hoofdfoto; `credit` is optioneel   |
+| `beschrijving`   | `"Nette Volkswagen Golf…"`        | Tekst op de detailpagina                          |
+| `opties`         | `["Navigatie", "Trekhaak"]`       | Lijst "Uitrusting" op de detailpagina             |
+| `carrosserie`, `kleur`, `vermogen_pk`, `deuren` | `"SUV"`, `"Grijs"`, `141`, `5` | Tabel "Specificaties" op de detailpagina |
+| `kenteken`       | `""`                              | Voor de latere RDW-koppeling (zie hieronder)      |
 
-`carrosserie` en `kleur` staan al in de data maar worden nog niet getoond.
+Een auto met status `verkocht` krijgt een rood "VERKOCHT"-lint op de kaart en op de detailpagina. In het overzicht staat hij achteraan, en hij verschijnt niet bij de uitgelichte occasions.
+
+## Detailpagina en RDW-gegevens (later)
+
+Elke kaart linkt naar `auto.html?id=<id>`. Daar staan grote foto's, de beschrijving, de uitrusting, een specificatietabel en contactknoppen. De WhatsApp-knop opent een vooraf ingevuld bericht over die auto.
+
+Voorbereid voor de RDW-koppeling:
+- In `autos.json` heeft elke auto een (nu leeg) veld `kenteken`.
+- In `assets/js/main.js` staat `toonRdwGegevens(auto)` als uitbreidingspunt, met de link naar de open data van de RDW (`opendata.rdw.nl`, gratis en zonder sleutel). Op de pagina is het blok `#rdw-gegevens` er al; het blijft verborgen tot het gevuld wordt.
+- Extra regels in de specificatietabel voeg je toe in de lijst `SPECIFICATIES` in `main.js`.
 
 ## Fotoverantwoording
 

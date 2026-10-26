@@ -1,5 +1,5 @@
 {
-  "_toelichting": "Demo-aanbod. Elke auto is één object in 'autos'. Prijs en kilometerstand als getal (zonder punten). Status: 'beschikbaar', 'gereserveerd' of 'verkocht'. Foto's met een 'credit' komen van Wikimedia Commons (CC BY-SA 4.0); bij eigen foto's mag 'credit' weg.",
+  "_toelichting": "Demo-aanbod. Elke auto is één object in 'autos'. Prijs en kilometerstand als getal (zonder punten). Status: 'beschikbaar', 'gereserveerd' of 'verkocht'. 'kenteken' is bedoeld voor de latere koppeling met RDW-gegevens. Foto's met een 'credit' komen van Wikimedia Commons (CC BY-SA 4.0); bij eigen foto's mag 'credit' weg.",
   "autos": [
     {
       "id": "vw-golf-2021",
@@ -13,9 +13,14 @@
       "transmissie": "Automaat",
       "carrosserie": "Hatchback",
       "kleur": "Wit",
+      "vermogen_pk": 110,
+      "deuren": 5,
+      "kenteken": "",
       "status": "beschikbaar",
       "uitgelicht": true,
       "toegevoegd": "2026-10-20",
+      "beschrijving": "Nette Volkswagen Golf met de zuinige 1.0 eTSI mild-hybrid motor en een soepele DSG-automaat. De auto is in Nederland geleverd en volledig dealeronderhouden. Bij aflevering krijgt hij een grote onderhoudsbeurt en een nieuwe APK.",
+      "opties": ["Adaptieve cruise control", "Navigatie (Discover Media)", "Apple CarPlay en Android Auto", "LED-koplampen", "Parkeersensoren voor en achter", "Climate control"],
       "fotos": [
         {
           "src": "assets/img/autos/golf-1.jpg",
@@ -41,9 +46,14 @@
       "transmissie": "Automaat",
       "carrosserie": "SUV",
       "kleur": "Grijs",
+      "vermogen_pk": 141,
+      "deuren": 5,
+      "kenteken": "",
       "status": "beschikbaar",
       "uitgelicht": true,
       "toegevoegd": "2026-10-17",
+      "beschrijving": "Ruime en zeer zuinige Kia Niro hybride van de nieuwste generatie. Ideaal als gezinsauto: hoge instap, veel bagageruimte en stil in de stad. Er loopt nog fabrieksgarantie tot 2030.",
+      "opties": ["Fabrieksgarantie tot 2030", "Navigatie met live verkeersinfo", "Achteruitrijcamera", "Adaptieve cruise control", "Stoel- en stuurverwarming", "Draadloos laden telefoon"],
       "fotos": [
         {
           "src": "assets/img/autos/niro-1.jpg",
@@ -69,9 +79,14 @@
       "transmissie": "Automaat",
       "carrosserie": "Hatchback",
       "kleur": "Rood",
+      "vermogen_pk": 116,
+      "deuren": 5,
+      "kenteken": "",
       "status": "beschikbaar",
       "uitgelicht": true,
       "toegevoegd": "2026-10-12",
+      "beschrijving": "Sportieve Toyota Yaris hybride in opvallend rood met zwart dak. Rijdt in de stad grotendeels elektrisch en is daardoor erg zuinig. Eén eigenaar en een complete onderhoudshistorie.",
+      "opties": ["Tweekleurige lak (zwart dak)", "Achteruitrijcamera", "Apple CarPlay en Android Auto", "Lichtmetalen velgen 17 inch", "Rijstrookassistent", "Automatische airco"],
       "fotos": [
         {
           "src": "assets/img/autos/yaris-1.jpg",
@@ -97,9 +112,14 @@
       "transmissie": "Handgeschakeld",
       "carrosserie": "Hatchback",
       "kleur": "Wit",
+      "vermogen_pk": 95,
+      "deuren": 5,
+      "kenteken": "",
       "status": "beschikbaar",
       "uitgelicht": false,
       "toegevoegd": "2026-10-08",
+      "beschrijving": "Jonge Volkswagen Polo in de luxe Style-uitvoering, met de vernieuwde neus en LED-verlichting. Compact, comfortabel en met een lage kilometerstand. Een fijne eerste auto of tweede auto voor het gezin.",
+      "opties": ["IQ.LIGHT LED-matrixkoplampen", "Digitaal instrumentenpaneel", "Climate control", "Parkeersensoren achter", "Lichtmetalen velgen 16 inch", "Apple CarPlay en Android Auto"],
       "fotos": [
         {
           "src": "assets/img/autos/polo-1.jpg",
@@ -125,9 +145,14 @@
       "transmissie": "Handgeschakeld",
       "carrosserie": "Stationwagon",
       "kleur": "Zilver",
+      "vermogen_pk": 110,
+      "deuren": 5,
+      "kenteken": "",
       "status": "beschikbaar",
       "uitgelicht": false,
       "toegevoegd": "2026-10-03",
+      "beschrijving": "Praktische Škoda Octavia Combi met een enorme bagageruimte, ideaal voor gezin of zakelijk gebruik. De kilometers zijn vooral op de snelweg gereden en het onderhoud is steeds op tijd uitgevoerd.",
+      "opties": ["Navigatie", "Trekhaak (afneembaar)", "Cruise control", "Parkeersensoren voor en achter", "Elektrische achterklep", "Climate control (2 zones)"],
       "fotos": [
         {
           "src": "assets/img/autos/octavia-1.jpg",
@@ -153,9 +178,14 @@
       "transmissie": "Handgeschakeld",
       "carrosserie": "Hatchback",
       "kleur": "Wit",
-      "status": "beschikbaar",
+      "vermogen_pk": 100,
+      "deuren": 5,
+      "kenteken": "",
+      "status": "verkocht",
       "uitgelicht": false,
       "toegevoegd": "2026-09-27",
+      "beschrijving": "Zuinige en wendbare Renault Clio, perfect voor dagelijks gebruik in en rond Breukelen. Verzorgd interieur, een groot touchscreen en een lage kilometerstand voor het bouwjaar.",
+      "opties": ["Navigatie met 7 inch touchscreen", "Apple CarPlay en Android Auto", "Cruise control", "Parkeersensoren achter", "Automatisch inschakelende verlichting", "Airco"],
       "fotos": [
         {
           "src": "assets/img/autos/clio-1.jpg",
